@@ -1,11 +1,16 @@
 import React from "react";
-import Button from '@mui/material/Button';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom/cjs/react-router-dom.min";
+import Home from './pages/Home';
 
 const App = () => {
   return (
-    <Button variant="contained">
-      fodase
-    </Button>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 
