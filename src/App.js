@@ -5,7 +5,8 @@ import {
   Route,
 } from "react-router-dom/cjs/react-router-dom.min";
 
-import Home from './pages/Home';
+import Customers from "./pages/Customers";
+import Home from "./pages/Home";
 import TemplateDefault from "./Template/Default";
 
 const App = () => {
@@ -13,6 +14,9 @@ const App = () => {
     <TemplateDefault>
       <Router>
         <Switch>
+          <Route path="/customers">
+            <Customers />
+          </Route>
           <Route exact path="/">
             <Home />
           </Route>
