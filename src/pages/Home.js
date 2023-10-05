@@ -1,13 +1,14 @@
 import React from "react";
-import Header from "../partials/Header";
+// import Header from "../partials/Header";
+import Container from '@mui/material/Container';
 
-const App = () => {
-  return(
+const Home = () => {
+  return (
     <>
-      <Header />
+      <h1>Baby</h1>
       <p>Vai ti fude vai</p>
     </>
-  )
+  );
 };
 
-export default App;
+export default Home;
