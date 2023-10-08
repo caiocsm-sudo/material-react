@@ -11,8 +11,8 @@ import TemplateDefault from "./Template/Default";
 
 const App = () => {
   return (
-    <TemplateDefault>
-      <Router>
+    <Router>
+      <TemplateDefault>
         <Switch>
           <Route path="/customers">
             <Customers />
@@ -21,8 +21,8 @@ const App = () => {
             <Home />
           </Route>
         </Switch>
-      </Router>
-    </TemplateDefault>
+      </TemplateDefault>
+    </Router>
   );
 };
 

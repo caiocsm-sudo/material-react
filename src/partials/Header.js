@@ -1,18 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+
 import {
   AppBar,
-  Box,
   Toolbar,
   Typography,
   Button,
   IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-// import { Link } from "react-router-dom";
+
+import { Menu, PersonAdd, Home } from "@mui/icons-material";
+
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  // const history = useHistory();
+  let history = useHistory();
+
+  const setOpenHandler = function () {
+    setIsOpen(!isOpen);
+  };
+
+  const handleMenuClick = function (route) {
+    history.push(route);
+    setOpenHandler();
+  };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <>
       <AppBar position="static" color="primary">
         <Toolbar>
           <IconButton
@@ -21,8 +41,9 @@ const Header = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={() => setOpenHandler()}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <Typography
             variant="h6"
@@ -34,7 +55,23 @@ const Header = () => {
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
-    </Box>
+      <Drawer open={isOpen} onClose={() => setOpenHandler()}>
+        <List>
+          <ListItem button onClick={() => handleMenuClick("/")}>
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
+            <ListItemText>Home</ListItemText>
+          </ListItem>
+          <ListItem button onClick={() => handleMenuClick("/customers")}>
+            <ListItemIcon>
+              <PersonAdd />
+            </ListItemIcon>
+            <ListItemText>Customers</ListItemText>
+          </ListItem>
+        </List>
+      </Drawer>
+    </>
   );
 };
 
