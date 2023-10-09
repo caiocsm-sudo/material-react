@@ -35,7 +35,7 @@ export default function CustomersRegister() {
     console.log(form);
   };
 
-  const handleRegisterButton = function (e) {
+  const handleRegisterButton = function () {
     let hasError = false;
     let newFormState = {
       ...form,
@@ -63,7 +63,7 @@ export default function CustomersRegister() {
     }
 
     axios
-      .post("https://reqres.in/api/users", {
+      .patch("https://reqres.in/api/users/", {
         name: form.name.value,
         job: form.job.value,
       })
