@@ -97,11 +97,7 @@ export default function Edit() {
   function closeToasty() {
     setClose(false);
   }
-
-  function handleClick() {
-    setClose(true);
-  }
-
+  
   return (
     <>
       <h1
