@@ -13,7 +13,7 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { Menu, PersonAdd, Person, Home } from "@mui/icons-material";
+import { Menu, PersonAdd, Person, Home, Mode } from "@mui/icons-material";
 
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -68,6 +68,12 @@ const Header = () => {
               <PersonAdd />
             </ListItemIcon>
             <ListItemText>Add Customers</ListItemText>
+          </ListItem>
+          <ListItem button onClick={() => handleMenuClick("/customers/edit")}>
+            <ListItemIcon>
+              <Mode />
+            </ListItemIcon>
+            <ListItemText>Edit Customers</ListItemText>
           </ListItem>
           <ListItem button onClick={() => handleMenuClick("/customers")}>
             <ListItemIcon>

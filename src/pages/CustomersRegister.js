@@ -78,6 +78,7 @@ export default function CustomersRegister() {
     setClose(false);
   };
 
+  
   return (
     <>
       <h1

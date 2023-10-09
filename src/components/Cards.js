@@ -11,9 +11,17 @@ import {
 
 import { Delete, Mode } from "@mui/icons-material";
 
-export default function Cards({ id, profileImage, name, lastName, email, onRemoveCustomer }) {
+export default function Cards({
+  id,
+  profileImage,
+  name,
+  lastName,
+  email,
+  onRemoveCustomer,
+  onEditCustomer,
+}) {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [action, setAction] = useState('');
+  const [action, setAction] = useState("");
 
   const handleDialogOpen = function (action) {
     setAction(action);
@@ -24,8 +32,10 @@ export default function Cards({ id, profileImage, name, lastName, email, onRemov
     setDialogOpen(false);
   };
 
-  const handleOnConfirm = function () {
-    onRemoveCustomer(id);
+  const handleOnConfirm = function (action) {
+    if (action === "remove") onRemoveCustomer(id);
+    else onEditCustomer(id);
+
     handleDialogClose();
   };
 
@@ -44,7 +54,10 @@ export default function Cards({ id, profileImage, name, lastName, email, onRemov
           >
             <Delete />
           </IconButton>
-          <IconButton aria-label="share" onClick={() => handleDialogOpen("edit")}>
+          <IconButton
+            aria-label="edit"
+            onClick={() => handleDialogOpen("edit")}
+          >
             <Mode />
           </IconButton>
         </CardActions>

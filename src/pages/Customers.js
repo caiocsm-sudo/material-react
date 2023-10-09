@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import Cards from "../components/Cards";
 
 import Grid from "@mui/material/Grid";
 
 const Customers = () => {
+  const history = useHistory();
   const [customers, setCustomers] = useState([]);
 
   useEffect(() => {
@@ -25,6 +27,10 @@ const Customers = () => {
       });
   }
 
+  const handleEditCustomer = function(id) {
+    history.push('/customers/edit/' + id)
+  }
+
   return (
     <>
       <h1>Oi galera</h1>
@@ -40,6 +46,7 @@ const Customers = () => {
                 lastName={customer.last_name}
                 email={customer.email}
                 onRemoveCustomer={handleRemoveCustomer}
+                onEditCustomer={handleEditCustomer}
               />
             </Grid>
           );
