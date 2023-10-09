@@ -16,7 +16,14 @@ const Customers = () => {
     });
   }, []);
 
-  console.log(customers);
+  const handleRemoveCustomer = function(id) {
+    console.log(id);
+    axios.delete("https://reqres.in/api/users/" + id)
+      .then(res => {
+        const newCustomerState = customers.filter(customer => customer.id !== id);
+        setCustomers(newCustomerState);
+      });
+  }
 
   return (
     <>
@@ -27,10 +34,12 @@ const Customers = () => {
           return (
             <Grid item xs={4}>
               <Cards
+                id={customer.id}
                 profileImage={customer.avatar}
                 name={customer.first_name}
                 lastName={customer.last_name}
                 email={customer.email}
+                onRemoveCustomer={handleRemoveCustomer}
               />
             </Grid>
           );

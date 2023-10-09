@@ -1,26 +1,60 @@
-import React from 'react';
+import React, { useState } from "react";
+import DialogComponent from "./DialogComponent";
 
-import { Card, CardHeader, CardActions, Avatar, IconButton, styled } from "@mui/material";
-import { Favorite, Share } from '@mui/icons-material';
+import {
+  Card,
+  CardHeader,
+  CardActions,
+  Avatar,
+  IconButton,
+} from "@mui/material";
 
-export default function Cards({ profileImage, name, lastName, email }) {
+import { Delete, Mode } from "@mui/icons-material";
+
+export default function Cards({ id, profileImage, name, lastName, email, onRemoveCustomer }) {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [action, setAction] = useState('');
+
+  const handleDialogOpen = function (action) {
+    setAction(action);
+    setDialogOpen(true);
+  };
+
+  const handleDialogClose = function () {
+    setDialogOpen(false);
+  };
+
+  const handleOnConfirm = function () {
+    onRemoveCustomer(id);
+    handleDialogClose();
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        avatar={
-          <Avatar src={profileImage} aria-label="recipe" />
-        }
-        title={`${name} ${lastName}`}
-        subheader={email}
+    <>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardHeader
+          avatar={<Avatar src={profileImage} aria-label="recipe" />}
+          title={`${name} ${lastName}`}
+          subheader={email}
+        />
+        <CardActions disableSpacing>
+          <IconButton
+            aria-label="add to favorites"
+            onClick={() => handleDialogOpen("delete")}
+          >
+            <Delete />
+          </IconButton>
+          <IconButton aria-label="share" onClick={() => handleDialogOpen("edit")}>
+            <Mode />
+          </IconButton>
+        </CardActions>
+      </Card>
+      <DialogComponent
+        dialogOpen={dialogOpen}
+        onConfirm={handleOnConfirm}
+        setDialogClose={handleDialogClose}
+        title={`Do you really want to ${action} this customer?`}
       />
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <Favorite />
-        </IconButton>
-        <IconButton aria-label="share">
-          <Share />
-        </IconButton>
-      </CardActions>
-    </Card>
+    </>
   );
 }
